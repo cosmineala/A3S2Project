@@ -1,3 +1,6 @@
+#
+*.Development.json
+
 # Word
 ~$*.docx
 # OS x
