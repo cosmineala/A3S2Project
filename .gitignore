@@ -1,6 +1,6 @@
 #
 *.Development.json
-
+appsettings.Development.json
 # Word
 ~$*.docx
 # OS x
