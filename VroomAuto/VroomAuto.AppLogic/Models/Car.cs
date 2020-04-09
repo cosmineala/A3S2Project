@@ -6,7 +6,7 @@ using System.Text;
 
 namespace VroomAuto.AppLogic.Models
 {
-    class Car
+    public class Car
     {
         [Key]
         public int ID { get; set; }

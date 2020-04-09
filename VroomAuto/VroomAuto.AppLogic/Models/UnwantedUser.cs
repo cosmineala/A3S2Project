@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VroomAuto.AppLogic.Models
 {
-    class UnwantedUser
+    public class UnwantedUser
     {
         [Key]
         public int ID { get; set; }
