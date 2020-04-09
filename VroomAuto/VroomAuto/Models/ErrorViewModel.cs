@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Models
+namespace VroomAuto.Models
 {
     public class ErrorViewModel
     {

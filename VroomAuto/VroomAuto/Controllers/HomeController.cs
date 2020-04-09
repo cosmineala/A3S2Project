@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using App.Models;
+using VroomAuto.Models;
 
-namespace App.Controllers
+namespace VroomAuto.Controllers
 {
     public class HomeController : Controller
     {
