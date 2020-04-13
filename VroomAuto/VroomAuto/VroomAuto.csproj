@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VroomAuto.AppLogic\VroomAuto.AppLogic.csproj" />
     <ProjectReference Include="..\VroomAuto.DataAccess\VroomAuto.DataAccess.csproj" />
   </ItemGroup>
 
