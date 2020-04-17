@@ -36,10 +36,16 @@ namespace VroomAuto
             services.AddDbContext<VroomAutoDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
+<<<<<<< HEAD
             services.AddDbContext<MyPageDbContext>(options =>
               options.UseSqlServer(
                   Configuration.GetConnectionString("DefaultConnection")));
 
+=======
+            services.AddDbContext<HistoryManagerDbContext>(options =>
+                 options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+>>>>>>> f3fbed34d02e0bf3c6e1bd558ba74991308f59fe
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
