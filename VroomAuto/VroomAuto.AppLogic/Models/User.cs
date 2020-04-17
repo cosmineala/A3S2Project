@@ -9,7 +9,9 @@ namespace VroomAuto.AppLogic.Models
     {
         public int ID { get; set; }
         public Guid IdentityID { get; set; }
-        public UserType Type { get; set; }
+
+        public int UserTypeID { get; set; }
+        public UserType UserType { get; set; }
 
         public string Email { get; set; }
         public string Name { get; set; }
