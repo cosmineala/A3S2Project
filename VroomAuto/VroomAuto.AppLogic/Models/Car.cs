@@ -10,7 +10,9 @@ namespace VroomAuto.AppLogic.Models
     {
         [Key]
         public int ID { get; set; }
+
         public string RegistrationNumber { get; set; }
+
         public int Km { get; set; }
 
         [Column(TypeName = "Date")]
