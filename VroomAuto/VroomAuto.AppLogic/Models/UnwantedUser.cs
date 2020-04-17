@@ -7,7 +7,6 @@ namespace VroomAuto.AppLogic.Models
 {
     public class UnwantedUser
     {
-        [Key]
         public int ID { get; set; }
         public string CNP { get; set; }
     }

@@ -7,7 +7,7 @@ namespace VroomAuto.AppLogic.Models
 {
     public class UserType
     {
-        [Key]
+        public int ID { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
 
