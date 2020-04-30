@@ -1,0 +1,18 @@
+﻿@model VroomAuto.AppLogic.Models.Car;
+@{
+    ViewData["Title"] = "CarList";
+    Layout = "~/Views/Home/Index.cshtml";
+}
+
+<h1>CarList</h1>
+
+@foreach (var car in Model.Cars)
+{
+    <div>
+        @car.
+    </div>
+}
+
+<a href='@Url.Action("AddCar", "Admin")'>Add Car</a>
+
+
