@@ -45,6 +45,18 @@ namespace VroomAuto
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(options =>
+               {
+                   options.Password.RequireDigit = true;
+                   options.Password.RequiredLength = 8;
+                   options.Password.RequiredUniqueChars = 4;                  
+                   options.Password.RequireLowercase = true;
+                   options.Password.RequireUppercase = false;
+                   options.Password.RequireNonAlphanumeric = false;
+
+                   options.User.RequireUniqueEmail = true;
+               }
+            );
 
             services.AddControllersWithViews();
             services.AddRazorPages();

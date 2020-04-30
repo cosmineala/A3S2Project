@@ -23,5 +23,18 @@ namespace VroomAuto.AppLogic.Services
 
         }
 
+        public void RegisterUser( User user )
+        {
+            userRepository.Add(user);
+        }
+
+        public Guid StringToGuid( string user)
+        {
+
+            Guid userGuid = Guid.Empty;
+            Guid.TryParse(user, out userGuid);
+
+            return userGuid;
+        }
     }
 }

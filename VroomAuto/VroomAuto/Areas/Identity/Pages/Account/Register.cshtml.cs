@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
+using VroomAuto.AppLogic.Services;
+using VroomAuto.AppLogic.Models;
+
 namespace VroomAuto.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -23,17 +26,21 @@ namespace VroomAuto.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly UserService userService;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            UserService userService
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            this.userService = userService;
         }
 
         [BindProperty]
@@ -47,19 +54,35 @@ namespace VroomAuto.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Email*")]
             public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Password*")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirm password*")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "CNP*")]
+            public string CNP { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Name*")]
+            public string Name { get; set; }
+
+            [Display(Name = "Adress")]
+            public string Adress { get; set; }
+
+            [Display(Name = "Phone")]
+            public string Phone { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -76,6 +99,10 @@ namespace VroomAuto.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                var myUser = new User { IdentityID = userService.StringToGuid( user.Id ), Email = Input.Email, CNP = Input.CNP, Name = Input.Name, Adress = Input.Adress, Phone = Input.Phone };
+                userService.RegisterUser(myUser);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

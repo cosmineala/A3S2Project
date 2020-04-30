@@ -9,8 +9,8 @@ using VroomAuto.DataAccess;
 namespace VroomAuto.DataAccess.Migrations
 {
     [DbContext(typeof(VroomAutoDbContext))]
-    [Migration("20200417033526_SecondVroomMigration")]
-    partial class SecondVroomMigration
+    [Migration("20200430232410_InitialDataAccess")]
+    partial class InitialDataAccess
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,31 +175,9 @@ namespace VroomAuto.DataAccess.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserTypeID")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("UserTypeID");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("VroomAuto.AppLogic.Models.UserType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserTypes");
                 });
 
             modelBuilder.Entity("VroomAuto.AppLogic.Models.Car", b =>
@@ -230,15 +208,6 @@ namespace VroomAuto.DataAccess.Migrations
                     b.HasOne("VroomAuto.AppLogic.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("VroomAuto.AppLogic.Models.User", b =>
-                {
-                    b.HasOne("VroomAuto.AppLogic.Models.UserType", "UserType")
-                        .WithMany()
-                        .HasForeignKey("UserTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

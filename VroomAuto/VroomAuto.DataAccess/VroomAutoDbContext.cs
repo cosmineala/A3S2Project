@@ -17,7 +17,7 @@ namespace VroomAuto.DataAccess
         //---------------------------------------------------------User
         public DbSet<User> Users { get; set; }
         public DbSet<UnwantedUser> UnwantedUsers { get; set; }
-        public DbSet<UserType> UserTypes { get; set; }
+        //public DbSet<UserType> UserTypes { get; set; }
         //--------------------------------------------------------Car
         public DbSet<CarBrand> CarBrands { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
