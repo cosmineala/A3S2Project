@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 
 using VroomAuto.AppLogic.Services;
 using VroomAuto.AppLogic.Models;
+using VroomAuto.Models;
 
 namespace VroomAuto.Areas.Identity.Pages.Account
 {
@@ -44,46 +45,46 @@ namespace VroomAuto.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public UserInputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email*")]
-            public string Email { get; set; }
+        //public class InputModel
+        //{
+        //    [Required]
+        //    [EmailAddress]
+        //    [Display(Name = "Email*")]
+        //    public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password*")]
-            public string Password { get; set; }
+        //    [Required]
+        //    [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        //    [DataType(DataType.Password)]
+        //    [Display(Name = "Password*")]
+        //    public string Password { get; set; }
 
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password*")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+        //    [DataType(DataType.Password)]
+        //    [Display(Name = "Confirm password*")]
+        //    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        //    public string ConfirmPassword { get; set; }
 
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "CNP*")]
-            public string CNP { get; set; }
+        //    [Required]
+        //    [DataType(DataType.Text)]
+        //    [Display(Name = "CNP*")]
+        //    public string CNP { get; set; }
 
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "Name*")]
-            public string Name { get; set; }
+        //    [Required]
+        //    [DataType(DataType.Text)]
+        //    [Display(Name = "Name*")]
+        //    public string Name { get; set; }
 
-            [Display(Name = "Adress")]
-            public string Adress { get; set; }
+        //    [Display(Name = "Adress")]
+        //    public string Adress { get; set; }
 
-            [Display(Name = "Phone")]
-            public string Phone { get; set; }
-        }
+        //    [Display(Name = "Phone")]
+        //    public string Phone { get; set; }
+        //}
 
         public async Task OnGetAsync(string returnUrl = null)
         {
