@@ -7,5 +7,6 @@ namespace VroomAuto.AppLogic.Abstractions
     public interface IUserRepository : IRepository<User>
     {
         User GetUserFromIdentity(Guid identityID);
+        void UpdateUser(User user);
     }
 }
