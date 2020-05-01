@@ -28,6 +28,11 @@ namespace VroomAuto.AppLogic.Services
             userRepository.Add(user);
         }
 
+        public void UpdateUserData( User user)
+        {
+            Console.Write("Not Implemented : UserServices.UpdateUserData()");//NOT IMPLEMENTED
+        }
+
         public Guid StringToGuid( string user)
         {
 
