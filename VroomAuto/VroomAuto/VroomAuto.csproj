@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="Views\User\" />
+
     <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
