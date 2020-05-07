@@ -26,5 +26,3 @@ update-database -Context VroomAutoDbContext
 
 ---------------
 
-cosmineala@gmail.com
-Password12#$

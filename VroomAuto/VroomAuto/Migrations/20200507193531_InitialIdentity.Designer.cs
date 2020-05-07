@@ -9,7 +9,7 @@ using VroomAuto.Data;
 namespace VroomAuto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200430232348_InitialIdentity")]
+    [Migration("20200507193531_InitialIdentity")]
     partial class InitialIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

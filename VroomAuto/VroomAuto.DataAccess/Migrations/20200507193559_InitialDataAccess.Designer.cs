@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VroomAuto.DataAccess;
 
 namespace VroomAuto.DataAccess.Migrations
 {
     [DbContext(typeof(VroomAutoDbContext))]
-    partial class VroomAutoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200507193559_InitialDataAccess")]
+    partial class InitialDataAccess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
