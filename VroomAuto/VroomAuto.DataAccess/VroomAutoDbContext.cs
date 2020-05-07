@@ -14,18 +14,10 @@ namespace VroomAuto.DataAccess
         {
         }
 
-        //---------------------------------------------------------User
         public DbSet<User> Users { get; set; }
         public DbSet<UnwantedUser> UnwantedUsers { get; set; }
-        //--------------------------------------------------------Car
-        public DbSet<CarBrand> CarBrands { get; set; }
-        public DbSet<CarModel> CarModels { get; set; }
-        public DbSet<CarClass> CarClasses  { get; set; }
-        public DbSet<CarStatus> CarStatuses { get; set; }
         public DbSet<Car> Cars { get; set; }
-        //--------------------------------------------------------History
         public DbSet<History> Histories { get; set; }
-
 
     }
 }

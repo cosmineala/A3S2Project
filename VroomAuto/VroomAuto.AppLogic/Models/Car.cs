@@ -8,23 +8,21 @@ namespace VroomAuto.AppLogic.Models
 {
     public class Car
     {
-        [Key]
         public int ID { get; set; }
 
         public string RegistrationNumber { get; set; }
 
         public int Km { get; set; }
 
-        [Column(TypeName = "Date")]
         public DateTime ManufacutreDate { get; set; }
 
-        public CarStatus Status { get; set; }
+        public string Status { get; set; }
 
-        public CarBrand Brand { get; set; }
+        public string Brand { get; set; }
 
-        public CarModel Model { get; set; }
+        public string Model { get; set; }
 
-        public CarClass Class { get; set; }
+        public string Class { get; set; }
 
         public float Price { get; set; }
 

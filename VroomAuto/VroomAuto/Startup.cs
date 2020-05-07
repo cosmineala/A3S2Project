@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 
 using VroomAuto.DataAccess;
 
+
 namespace VroomAuto
 {
     public class Startup
@@ -30,15 +31,28 @@ namespace VroomAuto
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<VroomAutoDbContext>(options =>
-               options.UseSqlServer(
+               options.UseSqlite(
                    Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(options =>
+               {
+                   options.Password.RequireDigit = true;
+                   options.Password.RequiredLength = 8;
+                   options.Password.RequiredUniqueChars = 4;                  
+                   options.Password.RequireLowercase = true;
+                   options.Password.RequireUppercase = false;
+                   options.Password.RequireNonAlphanumeric = false;
+
+                   options.User.RequireUniqueEmail = true;
+               }
+            );
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
