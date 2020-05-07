@@ -5,12 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Context\**" />
-    <EmbeddedResource Remove="Context\**" />
-    <None Remove="Context\**" />
-  </ItemGroup>
 
-  <ItemGroup>
+    <Folder Include="Context\" />
+
     <Folder Include="Repositories\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
