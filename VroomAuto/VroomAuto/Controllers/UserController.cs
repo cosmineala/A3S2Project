@@ -24,10 +24,9 @@ namespace VroomAuto.Controllers
 
         public IActionResult Index(  )
         {
-            var identityID = userIdentity.GetUserId(User);
-            var user = userService.GetUserFromIdentity(identityID);
+            var users = userService.GetAll();
 
-            return View( user );
+            return View( users );
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using VroomAuto.AppLogic.Models;
 using VroomAuto.AppLogic.Abstractions;
+using System.Collections.Generic;
 
 namespace VroomAuto.AppLogic.Services
 {
@@ -12,6 +13,11 @@ namespace VroomAuto.AppLogic.Services
         public UserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return userRepository.GetAll();
         }
 
         public User GetUserFromIdentity(string identityID)

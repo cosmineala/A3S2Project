@@ -1,4 +1,4 @@
-﻿@model VroomAuto.AppLogic.Models.User;
+﻿@model IEnumerable<VroomAuto.AppLogic.Models.User>;
 @{
     ViewData["Title"] = "User Page";
 }
@@ -14,7 +14,7 @@
                 Name
             </th>
             <th>
-                User type
+                Adress
             </th>
             <th>
                 Email
@@ -26,20 +26,26 @@
     </thead>
 
     <tbody>
+        @foreach (var user in Model)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => Model.ID)
+                @Html.DisplayFor(modelItem => user.ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => Model.Name)
-            </td>           
+                @Html.DisplayFor(modelItem => user.Name)
+            </td>
             <th>
-                @Html.DisplayFor(modelItem => Model.Email)
+                @Html.DisplayFor(modelItem => user.Adress)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => Model.Phone)
+                @Html.DisplayFor(modelItem => user.Email)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => user.Phone)
             </th>
         </tr>
-    </tbody>
+        }
+        </tbody>
 
 </table>
