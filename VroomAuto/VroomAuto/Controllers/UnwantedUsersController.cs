@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using VroomAuto.DataAccess;
 
 namespace VroomAuto.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UnwantedUsersController : Controller
     {
         private readonly VroomAutoDbContext _context;
@@ -135,7 +137,6 @@ namespace VroomAuto.Controllers
         }
 
         // POST: UnwantedUsers/Delete/5
-        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

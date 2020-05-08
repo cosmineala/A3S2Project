@@ -47,7 +47,9 @@ namespace VroomAuto
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.Configure<IdentityOptions>(options =>
                {
                    options.Password.RequireDigit = true;

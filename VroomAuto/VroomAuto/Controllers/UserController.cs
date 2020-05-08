@@ -10,7 +10,7 @@ using VroomAuto.AppLogic.Services;
 
 namespace VroomAuto.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         UserManager<IdentityUser> userIdentity;
