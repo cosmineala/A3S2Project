@@ -14,6 +14,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using VroomAuto.DataAccess;
+using VroomAuto.DataAccess.Repositories;
+using VroomAuto.AppLogic.Abstractions;
+using VroomAuto.AppLogic.Services;
+
+
 
 
 namespace VroomAuto
@@ -37,6 +42,9 @@ namespace VroomAuto
             services.AddDbContext<VroomAutoDbContext>(options =>
                options.UseSqlite(
                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

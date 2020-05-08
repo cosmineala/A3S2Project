@@ -1,0 +1,45 @@
+﻿@model VroomAuto.AppLogic.Models.User;
+@{
+    ViewData["Title"] = "User Page";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                User type
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Name)
+            </td>           
+            <th>
+                @Html.DisplayFor(modelItem => Model.Email)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => Model.Phone)
+            </th>
+        </tr>
+    </tbody>
+
+</table>
