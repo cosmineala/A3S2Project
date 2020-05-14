@@ -24,7 +24,10 @@ namespace VroomAuto.AppLogic.Services
         {
             Guid identityIdGuid = Guid.Empty;
 
-            Guid.TryParse(identityID, out identityIdGuid);
+            if( Guid.TryParse(identityID, out identityIdGuid) == false)
+            {
+                throw new Exception("Invalid Guid format");
+            }
 
             return userRepository.GetUserFromIdentity(identityIdGuid);
 
@@ -37,7 +40,6 @@ namespace VroomAuto.AppLogic.Services
 
         public void UpdateUserData( User user)
         {
-            //Console.Write("Not Implemented : UserServices.UpdateUserData()");//NOT IMPLEMENTED
             userRepository.UpdateUser(user);
 
         }
@@ -46,7 +48,11 @@ namespace VroomAuto.AppLogic.Services
         {
 
             Guid userGuid = Guid.Empty;
-            Guid.TryParse(user, out userGuid);
+
+            if( Guid.TryParse(user, out userGuid) == false)
+            {
+                throw new Exception("Invalid Guid format");
+            }
 
             return userGuid;
         }
