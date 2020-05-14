@@ -23,6 +23,7 @@ namespace VroomAuto.AppLogic.Services
         public User GetUserFromIdentity(string identityID)
         {
             Guid identityIdGuid = Guid.Empty;
+
             Guid.TryParse(identityID, out identityIdGuid);
 
             return userRepository.GetUserFromIdentity(identityIdGuid);
