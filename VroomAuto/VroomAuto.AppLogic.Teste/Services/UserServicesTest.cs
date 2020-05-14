@@ -6,6 +6,7 @@ using VroomAuto.AppLogic.Models;
 using VroomAuto.AppLogic.Abstractions;
 using VroomAuto.AppLogic.Services;
 using VroomAuto.DataAccess.Repositories;
+using System.Collections.Generic;
 
 namespace VroomAuto.AppLogic.Teste.Services
 {
@@ -124,6 +125,61 @@ namespace VroomAuto.AppLogic.Teste.Services
 
             //Assert.AreEqual(exception, null);
             Assert.IsNull(outUser);
+
+        }
+
+        [TestMethod]
+        public void GetAll_Returns_AllUsers()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+
+            //var input = "7299FFCC-435E-4A6D-99DF-57A4D6FBA747";
+            //var expectedOutput = Guid.Parse("7299FFCC-435E-4A6D-99DF-57A4D6FBA712");
+
+            //1980701160000
+
+            List<User> users = new List<User>() ;
+            
+
+            users.Add(new User { ID = 1 });
+            users.Add(new User { ID = 2 });
+            users.Add(new User { ID = 3 });
+            users.Add(new User { ID = 4 });
+
+            IEnumerable<User> usersEnumerable = users;
+
+            userRepositorMock.Setup( c => c.GetAll() ).
+                Returns( usersEnumerable );
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+            var outputUsers = userService.GetAll();
+
+            Assert.IsNotNull( outputUsers );
+            Assert.AreEqual(usersEnumerable, outputUsers);
+
+        }
+
+        [TestMethod]
+        public void GetAll_ThrowsException_NoUserWasFound()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+
+
+            List<User> users = null;
+
+
+            IEnumerable<User> usersEnumerable = users;
+
+            userRepositorMock.Setup(c => c.GetAll()).
+                Returns(usersEnumerable);
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+            var outputUsers = userService.GetAll();
+
+            Assert.IsNull(outputUsers);
+            //Assert.AreEqual(usersEnumerable, outputUsers);
 
         }
 
