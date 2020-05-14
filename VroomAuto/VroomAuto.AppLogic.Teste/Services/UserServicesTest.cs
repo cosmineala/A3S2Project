@@ -133,18 +133,13 @@ namespace VroomAuto.AppLogic.Teste.Services
         {
             Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
 
-            //var input = "7299FFCC-435E-4A6D-99DF-57A4D6FBA747";
-            //var expectedOutput = Guid.Parse("7299FFCC-435E-4A6D-99DF-57A4D6FBA712");
-
-            //1980701160000
-
             List<User> users = new List<User>() ;
-            
 
-            users.Add(new User { ID = 1 });
-            users.Add(new User { ID = 2 });
-            users.Add(new User { ID = 3 });
-            users.Add(new User { ID = 4 });
+            users.Add(new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = "1980251160301", Adress = "Craiova Str.Calea Bucuresti nr.17" } );
+            users.Add(new User { ID = 2, Name = "Dan",    IdentityID = Guid.NewGuid(), CNP = "3251251160301", Adress = "Suceava Str.Berii nr.4" });
+            users.Add(new User { ID = 3, Name = "Mihai",  IdentityID = Guid.NewGuid(), CNP = "5247251160301", Adress = "Bucuresti Str.Antiaeriana nr.145" });
+            users.Add(new User { ID = 4, Name = "Andrei", IdentityID = Guid.NewGuid(), CNP = "2472251160301", Adress = "Calafat Str.Muncii nr.5-7" });
+            users.Add(new User { ID = 5, Name = "Florin", IdentityID = Guid.NewGuid(), CNP = "3532251160301", Adress = "Constanta Str.Teiului nr.22" });
 
             IEnumerable<User> usersEnumerable = users;
 
@@ -161,7 +156,7 @@ namespace VroomAuto.AppLogic.Teste.Services
         }
 
         [TestMethod]
-        public void GetAll_ThrowsException_NoUserWasFound()
+        public void GetAll_ReturnsNull_NoUserWasFound()
         {
             Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
 
@@ -179,37 +174,8 @@ namespace VroomAuto.AppLogic.Teste.Services
             var outputUsers = userService.GetAll();
 
             Assert.IsNull(outputUsers);
-            //Assert.AreEqual(usersEnumerable, outputUsers);
 
         }
-
-        //[TestMethod]
-        //public void StringToGuid_Returns_ConvertedStringToGuid()
-        //{
-        //    Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>() ;
-
-        //    var input = "7299FFCC-435E-4A6D-99DF-57A4D6FBA747";
-        //    var expectedOutput = Guid.Parse("7299FFCC-435E-4A6D-99DF-57A4D6FBA712");
-
-        //    //1980701160000
-        //    var user = new User
-        //    {
-        //        ID = 1,
-        //        Name = "Cosmin",
-        //        IdentityID = expectedOutput,
-        //        CNP = "1980251160301",
-        //        Adress = "Craiova Str.Calea Bucuresti nr.17"
-        //    };
-
-        //    //userRepositorMock.Setup( c => c.StringToGuid( input ) ).
-        //    //    Returns( expectedOutput );
-
-        //    UserService userService = new UserService(userRepositorMock.Object);
-
-        //    Assert.ThrowsException<Exception>(
-        //                () => { userService.StringToGuid(input); }
-        //            );
-        //}
 
     }
 }
