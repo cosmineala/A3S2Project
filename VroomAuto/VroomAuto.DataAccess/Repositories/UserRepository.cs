@@ -13,6 +13,14 @@ namespace VroomAuto.DataAccess.Repositories
         {
         }
 
+        public UnwantedUser GetUnwantedUserByCNP(string CNP)
+        {
+            return dbContext.UnwantedUsers
+                .Where(p => p.CNP == CNP )
+                .SingleOrDefault();
+
+        }
+
         public User GetUserFromIdentity(Guid identityID)
         {
             return dbContext.Users

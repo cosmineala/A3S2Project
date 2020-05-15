@@ -35,7 +35,15 @@ namespace VroomAuto.AppLogic.Services
 
         public void RegisterUser( User user )
         {
-            userRepository.Add(user);
+            if( CheckIfUserIsBaned( user ))
+            {
+                throw new Exception("User is baned bu CNP");
+            }
+            else
+            {
+                userRepository.Add(user);
+            }
+            
         }
 
         public void UpdateUserData( User user)
@@ -55,6 +63,20 @@ namespace VroomAuto.AppLogic.Services
             }
 
             return userGuid;
+        }
+
+        public bool CheckIfUserIsBaned( User user)
+        {
+            var result = userRepository.GetUnwantedUserByCNP( user.CNP );
+
+            if( result == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

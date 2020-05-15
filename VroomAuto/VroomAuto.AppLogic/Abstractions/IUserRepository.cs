@@ -8,5 +8,6 @@ namespace VroomAuto.AppLogic.Abstractions
     {
         User GetUserFromIdentity(Guid identityID);
         void UpdateUser(User user);
+        UnwantedUser GetUnwantedUserByCNP(string CNP);
     }
 }
