@@ -29,7 +29,6 @@ namespace VroomAuto.AppLogic.Teste.Services
             Assert.AreEqual(expectedOutput, expectedOutput);
 
         }
-
         [TestMethod]
         public void StringToGuid_ThrowsException_ConvertedStringToGuid()
         {
@@ -88,7 +87,6 @@ namespace VroomAuto.AppLogic.Teste.Services
             Assert.IsNotNull(outUser);
 
         }
-
         [TestMethod]
         public void GetUserFromIdentity_ReturnsNull_IfUserDoseNotExists()
         {
@@ -127,7 +125,6 @@ namespace VroomAuto.AppLogic.Teste.Services
             Assert.IsNull(outUser);
 
         }
-
         [TestMethod]
         public void GetUserFromIdentity_ThrowsException_IfGuidIsBad()
         {
@@ -165,7 +162,6 @@ namespace VroomAuto.AppLogic.Teste.Services
             Assert.ThrowsException<Exception>(
                 () => { userService.GetUserFromIdentity(in_String); }
              );
-
         }
 
         [TestMethod]
@@ -194,7 +190,6 @@ namespace VroomAuto.AppLogic.Teste.Services
             Assert.AreEqual(usersEnumerable, outputUsers);
 
         }
-
         [TestMethod]
         public void GetAll_ReturnsNull_NoUserWasFound()
         {
@@ -246,9 +241,7 @@ namespace VroomAuto.AppLogic.Teste.Services
 
             Assert.AreEqual(exception, null);
 
-
         }
-
         [TestMethod]
         public void RegisterUser_ThrowsException_UserIsBanedByCNP()
         {
@@ -270,9 +263,191 @@ namespace VroomAuto.AppLogic.Teste.Services
             Assert.ThrowsException<Exception>(
                        () => { userService.RegisterUser(user); }
                    );
+        }
+//------------------------------------------------------------------------------------------------------
+        [TestMethod]
+        public void UpdateUserData_Successful_UserWasUpdated()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+
+            User user = new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = "1980251160301", Adress = "Craiova Str.Calea Bucuresti nr.17" };
+
+            Exception exception = null;
+
+            userRepositorMock.Setup(c => c.UpdateUser(user));
+
+
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+            try
+            {
+                userService.UpdateUserData(user);
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            Assert.AreEqual(exception, null);
 
         }
+        [TestMethod]
+        public void UpdateUserData_ThrowsException_UserWasUpdated()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
 
+            User user = new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = "1980251160301", Adress = "Craiova Str.Calea Bucuresti nr.17" };
+
+            userRepositorMock.Setup(c => c.UpdateUser(user))
+                    .Throws(new Exception("User was not found"));
+
+
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+            Assert.ThrowsException<Exception>(
+                    () => { userService.UpdateUserData(user); }
+             );
+        }
+
+
+        [TestMethod]
+        public void GetUser_Successful_UserIsReturned()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+
+            int userID = 1;
+
+            User user = new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = "1980251160301", Adress = "Craiova Str.Calea Bucuresti nr.17" };
+
+            Exception exception = null;
+
+            userRepositorMock.Setup(c => c.GetUser( userID ))
+                .Returns( user );
+
+
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+            User outUser = null ;
+
+            try
+            {
+                 outUser = userService.GetUser( userID );
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            Assert.AreEqual(exception, null);
+            Assert.AreEqual(outUser, user);
+        }
+        [TestMethod]
+        public void GetUser_ThrowsException_UserWasNotFound()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+
+            int userID = 1;
+
+            User user = new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = "1980251160301", Adress = "Craiova Str.Calea Bucuresti nr.17" };
+
+            userRepositorMock.Setup(c => c.GetUser(userID))
+                .Throws( new Exception("User was not found") );
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+            Assert.ThrowsException<Exception>(
+                    () => { userService.GetUser( userID ); }
+             );
+        }
+
+        public class BoolCheck
+        {
+            public BoolCheck( bool value)
+            {
+                this.value = value;
+                this.wasSet = true;
+            }
+
+            public bool wasSet = false;
+            public bool value;
+        }
+
+        public void CheckIfUserIsBaned_ReturnsTrue_IfUserIsBaned()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+            string inputCNP = "1980251160301";
+
+            //UnwantedUser checkResoult = null;
+            User user = new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = inputCNP, Adress = "Craiova Str.Calea Bucuresti nr.17" };
+            UnwantedUser unwantedUser = new UnwantedUser { ID = 1, CNP = inputCNP };
+            
+
+            Exception exception = null;
+
+            userRepositorMock.Setup(c => c.GetUnwantedUserByCNP(inputCNP)).
+                Returns( unwantedUser );
+
+
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+
+            BoolCheck boolCheck = null;
+
+            try
+            {
+                boolCheck = new BoolCheck( userService.CheckIfUserIsBaned(user) );
+               
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            Assert.AreEqual(exception, null);
+            Assert.AreNotEqual(boolCheck, null);
+            Assert.AreEqual(boolCheck.value, true);
+            Assert.AreEqual(boolCheck.wasSet, true);
+
+        }
+        [TestMethod]
+        public void CheckIfUserIsBaned_ReturnsFalse_IfUserIsNotBaned()
+        {
+            Mock<IUserRepository> userRepositorMock = new Mock<IUserRepository>();
+            string inputCNP = "1980251160301";
+
+            UnwantedUser unwantedUser = null;
+            User user = new User { ID = 1, Name = "Cosmin", IdentityID = Guid.NewGuid(), CNP = "1980251160301", Adress = "Craiova Str.Calea Bucuresti nr.17" };
+
+            Exception exception = null;
+
+            userRepositorMock.Setup(c => c.GetUnwantedUserByCNP(inputCNP)).
+                Returns( unwantedUser );
+
+            UserService userService = new UserService(userRepositorMock.Object);
+
+
+            BoolCheck boolCheck = null;
+
+            try
+            {
+                boolCheck = new BoolCheck(userService.CheckIfUserIsBaned(user));
+
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            Assert.AreEqual(exception, null);
+            Assert.AreNotEqual(boolCheck, null);
+            Assert.AreEqual(boolCheck.value, false);
+            Assert.AreEqual(boolCheck.wasSet, true);
+
+        }
 
     }
 }

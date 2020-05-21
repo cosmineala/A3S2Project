@@ -15,6 +15,11 @@ namespace VroomAuto.AppLogic.Services
             this.userRepository = userRepository;
         }
 
+        public User GetUser( int id)
+        {
+            return userRepository.GetUser(id);
+        }
+
         public IEnumerable<User> GetAll()
         {
             return userRepository.GetAll();
