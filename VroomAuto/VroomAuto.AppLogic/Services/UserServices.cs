@@ -15,6 +15,11 @@ namespace VroomAuto.AppLogic.Services
             this.userRepository = userRepository;
         }
 
+        public User GetUser( int id)
+        {
+            return userRepository.GetUser(id);
+        }
+
         public IEnumerable<User> GetAll()
         {
             return userRepository.GetAll();
@@ -23,7 +28,11 @@ namespace VroomAuto.AppLogic.Services
         public User GetUserFromIdentity(string identityID)
         {
             Guid identityIdGuid = Guid.Empty;
-            Guid.TryParse(identityID, out identityIdGuid);
+
+            if( Guid.TryParse(identityID, out identityIdGuid) == false)
+            {
+                throw new Exception("Invalid Guid format");
+            }
 
             return userRepository.GetUserFromIdentity(identityIdGuid);
 
@@ -31,12 +40,19 @@ namespace VroomAuto.AppLogic.Services
 
         public void RegisterUser( User user )
         {
-            userRepository.Add(user);
+            if( CheckIfUserIsBaned( user ))
+            {
+                throw new Exception("User is baned bu CNP");
+            }
+            else
+            {
+                userRepository.Add(user);
+            }
+            
         }
 
         public void UpdateUserData( User user)
         {
-            //Console.Write("Not Implemented : UserServices.UpdateUserData()");//NOT IMPLEMENTED
             userRepository.UpdateUser(user);
 
         }
@@ -45,9 +61,27 @@ namespace VroomAuto.AppLogic.Services
         {
 
             Guid userGuid = Guid.Empty;
-            Guid.TryParse(user, out userGuid);
+
+            if( Guid.TryParse(user, out userGuid) == false)
+            {
+                throw new Exception("Invalid Guid format");
+            }
 
             return userGuid;
+        }
+
+        public bool CheckIfUserIsBaned( User user)
+        {
+            var result = userRepository.GetUnwantedUserByCNP( user.CNP );
+
+            if( result == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
